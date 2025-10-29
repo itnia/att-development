@@ -403,12 +403,25 @@ class PageResponse extends HtmlResponse
         $result = [];
 
         foreach ($this->sections as $sectionName => $sectionItems) {
+            foreach ($sectionItems as $index => &$item) {
+                $item['__original_index'] = $index;
+            }
+
             usort($sectionItems, function($a, $b) {
-                if ($b['priority'] == $a['priority']) {
-                    return 0;
+                if ($b['priority'] != $a['priority']) {
+                    return ($b['priority'] < $a['priority']) ? -1 : 1;
                 }
-                return ($b['priority'] < $a['priority']) ? -1 : 1;
+                if ($a['__original_index'] != $b['__original_index']) {
+                    return ($a['__original_index'] < $b['__original_index']) ? -1 : 1;
+                }
+                return 0;
             });
+
+            foreach ($sectionItems as &$item) {
+                unset($item['__original_index']);
+            }
+
+            unset($item);
 
             $result[$sectionName] = '';
             foreach ($sectionItems as $item) {

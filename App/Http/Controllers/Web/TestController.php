@@ -26,9 +26,10 @@ class TestController extends Controller
 
     protected function showPage()
     {
-        // dump(self::class);
-        // dump($this->getRouteKey());
-        // dump($this->getRouteParam());
+        dump(self::class);
+        dump($this->getRouteKey());
+        dump($this->getRouteParam());
+
         // ...
         $newsId = (int)$this->getRouteParam();
         $newsItem = $this->getNewsById($newsId);
@@ -50,6 +51,11 @@ class TestController extends Controller
     }
 
     protected function getNewsById($id)
+    {
+        return [];
+    }
+
+    protected function getNewsByAlias($alias)
     {
         return [];
     }

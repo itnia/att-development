@@ -77,15 +77,15 @@ abstract class Controller
         return false;
     }
 
-
-
     protected function getRouteKey()
     {
-        return \LegacyRouter::getCurrentRoute();
+        $key = \LegacyRouter::getCurrentRoute();
+        return $key !== '__' ? $key : null;
     }
 
     protected function getRouteParam()
     {
-        return \LegacyRouter::getParams();
+        $params = \LegacyRouter::getParams();
+        return isset($params[0]) ? $params[0] : null;
     }
 }

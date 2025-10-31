@@ -1,8 +1,7 @@
 <?php
 
 const BASE_PATH = __DIR__;
-
-include_once __DIR__ . '/autoload.php';
+require BASE_PATH . '/vendor/autoload.php';
 include_once __DIR__ . '/functions.php';
 include_once __DIR__ . '/router.php';
 
